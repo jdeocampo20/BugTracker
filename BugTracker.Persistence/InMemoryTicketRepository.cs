@@ -9,10 +9,10 @@ namespace BugTracker.Persistence
 {
     public class InMemoryTicketRepository : ITicketRepository
     {
-        List<Ticket> tickets;
-        List<TicketType> ticketTypes;
-        List<TicketStatus> ticketStatuses;
-        List<TicketPriority> ticketPriorities;
+        public List<Ticket> tickets;
+        public List<TicketType> ticketTypes;
+        public List<TicketStatus> ticketStatuses;
+        public List<TicketPriority> ticketPriorities;
 
         public InMemoryTicketRepository()
         {

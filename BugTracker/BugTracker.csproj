@@ -23,5 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Tickets\" />
+    <Folder Include="Views\Projects\" />
   </ItemGroup>
 </Project>

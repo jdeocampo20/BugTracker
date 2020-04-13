@@ -35,6 +35,8 @@ namespace BugTracker
 
             services.AddScoped<IMachineDateTime, MachineDateTime>();
             services.AddScoped<ITicketRepository, InMemoryTicketRepository>();
+            services.AddScoped<IProjectRepository, InMemoryProjectRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
