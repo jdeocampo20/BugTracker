@@ -3,7 +3,7 @@
     ViewData["Title"] = "Tickets";
 }
 
-<h1 class="page-title">Tickets</h1>
+<h1 class="page-title">@ViewData["Title"]</h1>
 <a class="btn btn-primary crt-new-btn" asp-controller="Tickets" asp-action="Create">Create New</a>
 <table class="table table-striped table-hover">
     <thead>
@@ -20,7 +20,11 @@
         @foreach (var ticket in Model)
         {
             <tr>
-                <td>@ticket.Name</td>
+                <td>
+                    <a asp-controller="Tickets" asp-action="Details" asp-route-ticketId="@ticket.Id">
+                        @ticket.Name
+                    </a>
+                </td>
                 <td>@ticket.Project.Name</td>
                 <td>@ticket.Type.Name</td>
                 <td>@ticket.Priority.Name</td>

@@ -46,6 +46,12 @@ namespace BugTracker.Controllers
             return View(ctvm);
         }
 
+        public async Task<IActionResult> Details(int ticketId)
+        {
+            var ticket = await ticketRepository.GetTicketByIdAsync(ticketId);
+            return View(ticket);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> CreateNewTicket(CreateTicketViewModel viewModel)

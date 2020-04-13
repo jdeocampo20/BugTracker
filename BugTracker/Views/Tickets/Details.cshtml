@@ -1,0 +1,42 @@
+﻿@model Ticket
+@{
+    ViewData["Title"] = "Ticket Details";
+}
+
+<h1 class="page-title">@Model.Name</h1>
+<div class="card mb-3">
+    <div class="card-header">Details</div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <span class="font-weight-bold">Type:</span> @Model.Type.Name
+                </div>
+                <div class="col-sm">
+                    <span class="font-weight-bold">Priority:</span> @Model.Priority.Name
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <span class="font-weight-bold">Created:</span> @Model.CreatedDate
+                </div>
+                <div class="col-sm">
+                    <span class="font-weight-bold">Status:</span> @Model.Status.Name
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <span class="font-weight-bold">Modified:</span> @Model.ModifiedDate
+                </div>
+                <div class="col-sm">
+                    <span class="font-weight-bold">Project:</span> @Model.Project.Name
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">Description</div>
+    <div class="card-body">@Model.Description</div>
+</div>
