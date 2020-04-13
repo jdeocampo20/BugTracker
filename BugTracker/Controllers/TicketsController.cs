@@ -1,5 +1,9 @@
-﻿using BugTracker.Application.Interfaces;
+﻿using System.Linq;
+using BugTracker.Application.Interfaces;
+using BugTracker.Domain.Entities;
+using BugTracker.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,10 +12,13 @@ namespace BugTracker.Controllers
     public class TicketsController : Controller
     {
         private readonly ITicketRepository ticketRepository;
+        private readonly IProjectRepository projectRepository;
 
-        public TicketsController(ITicketRepository ticketRepository)
+        public TicketsController(ITicketRepository ticketRepository,
+            IProjectRepository projectRepository)
         {
             this.ticketRepository = ticketRepository;
+            this.projectRepository = projectRepository;
         }
 
         // GET: /<controller>/
@@ -19,6 +26,32 @@ namespace BugTracker.Controllers
         {
             var tickets = ticketRepository.AllTickets;
             return View(tickets);
+        }
+
+        public IActionResult Create()
+        {
+            var projects = projectRepository.AllProjects.Select(p => new SelectListItem
+            {
+                Value = p.Id.ToString(),
+                Text = p.Name
+            });
+
+            var ctvm = new CreateTicketViewModel
+            {
+                Ticket = new Ticket(),
+                Projects = projects
+            };
+
+            return View(ctvm);
+        }
+
+
+        [HttpPost]
+        public IActionResult CreateNewTicket(CreateTicketViewModel viewModel)
+        {
+            ticketRepository.AddTicket(viewModel.Ticket);
+            ticketRepository.Commit();
+            return RedirectToAction("Index");
         }
     }
 }

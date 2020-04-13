@@ -9,12 +9,14 @@ namespace BugTracker.Persistence
 {
     public class InMemoryTicketRepository : ITicketRepository
     {
+        private readonly IMachineDateTime machineDateTime;
+        private readonly IProjectRepository projectRepository;
         public List<Ticket> tickets;
         public List<TicketType> ticketTypes;
         public List<TicketStatus> ticketStatuses;
         public List<TicketPriority> ticketPriorities;
 
-        public InMemoryTicketRepository()
+        public InMemoryTicketRepository(IMachineDateTime machineDateTime, IProjectRepository projectRepository)
         {
             ticketTypes = Enum.GetNames(typeof(Enums.TicketType))
                 .Select(x => new TicketType
@@ -79,7 +81,8 @@ namespace BugTracker.Persistence
                     }
                 }
             };
-
+            this.machineDateTime = machineDateTime;
+            this.projectRepository = projectRepository;
         }
 
         public IEnumerable<TicketType> AllTicketTypes => ticketTypes;
@@ -93,8 +96,14 @@ namespace BugTracker.Persistence
         public Ticket AddTicket(Ticket ticket)
         {
             ticket.Id = tickets.Max(t => t.Id) + 1;
-            ticket.CreatedDate = DateTime.Now; // TODO: Move to machine time service
-            ticket.ModifiedDate = DateTime.Now;
+            ticket.CreatedDate = machineDateTime.Now;
+            ticket.ModifiedDate = machineDateTime.Now;
+            ticket.TicketStatusId = (int)Enums.TicketStatus.ToDo;
+            ticket.Project = projectRepository.GetProjectById(ticket.ProjectId);
+            ticket.Type = AllTicketTypes.FirstOrDefault(t => t.Id == ticket.TicketTypeId);
+            ticket.Priority = AllTicketPriorities.FirstOrDefault(t => t.Id == ticket.TicketPriorityId);
+            ticket.Status = AllTicketStatuses.FirstOrDefault(t => t.Id == (int)Enums.TicketStatus.ToDo);
+
             tickets.Add(ticket);
             return ticket;
         }
