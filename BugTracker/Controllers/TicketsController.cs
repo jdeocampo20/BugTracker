@@ -49,6 +49,11 @@ namespace BugTracker.Controllers
         [HttpPost]
         public IActionResult CreateNewTicket(CreateTicketViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             ticketRepository.AddTicket(viewModel.Ticket);
             ticketRepository.Commit();
             return RedirectToAction("Index");

@@ -33,6 +33,7 @@ namespace BugTracker.Persistence
 
         public Project AddProject(Project project)
         {
+            project.Id = projects.Max(p => p.Id) + 1;
             projects.Add(project);
             return project;
         }

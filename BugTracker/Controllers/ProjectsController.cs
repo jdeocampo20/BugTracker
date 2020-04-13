@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BugTracker.Application.Interfaces;
+using BugTracker.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,6 +24,24 @@ namespace BugTracker.Controllers
         {
             var projects = projectRepository.AllProjects;
             return View(projects);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateNewProject(Project project)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            projectRepository.AddProject(project);
+            projectRepository.Commit();
+            return RedirectToAction("Index");
         }
     }
 }
