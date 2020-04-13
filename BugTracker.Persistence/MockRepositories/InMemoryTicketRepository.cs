@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BugTracker.Application.Interfaces;
 using BugTracker.Domain.Entities;
 using Enums = BugTracker.Domain.Enums;
@@ -93,35 +94,41 @@ namespace BugTracker.Persistence
 
         public IEnumerable<Ticket> AllTickets => tickets;
 
-        public Ticket AddTicket(Ticket ticket)
+        public async Task<Ticket> AddTicketAsync(Ticket ticket)
         {
-            ticket.Id = tickets.Max(t => t.Id) + 1;
-            ticket.CreatedDate = machineDateTime.Now;
-            ticket.ModifiedDate = machineDateTime.Now;
-            ticket.TicketStatusId = (int)Enums.TicketStatus.ToDo;
-            ticket.Project = projectRepository.GetProjectById(ticket.ProjectId);
-            ticket.Type = AllTicketTypes.FirstOrDefault(t => t.Id == ticket.TicketTypeId);
-            ticket.Priority = AllTicketPriorities.FirstOrDefault(t => t.Id == ticket.TicketPriorityId);
-            ticket.Status = AllTicketStatuses.FirstOrDefault(t => t.Id == (int)Enums.TicketStatus.ToDo);
-
+            await Task.Run(() =>
+            {
+                ticket.Id = tickets.Max(t => t.Id) + 1;
+                ticket.CreatedDate = machineDateTime.Now;
+                ticket.ModifiedDate = machineDateTime.Now;
+                ticket.TicketStatusId = (int)Enums.TicketStatus.ToDo;
+                ticket.Project = projectRepository.GetProjectById(ticket.ProjectId);
+                ticket.Type = AllTicketTypes.FirstOrDefault(t => t.Id == ticket.TicketTypeId);
+                ticket.Priority = AllTicketPriorities.FirstOrDefault(t => t.Id == ticket.TicketPriorityId);
+                ticket.Status = AllTicketStatuses.FirstOrDefault(t => t.Id == (int)Enums.TicketStatus.ToDo);
+            });
             tickets.Add(ticket);
             return ticket;
         }
 
-        public int Commit()
+        public Task<int> CommitAsync()
         {
-            return 0;
+            return Task.Run(() => 0);
         }
 
-        public Ticket DeleteTicket(int ticketId)
+        public async Task<Ticket> DeleteTicketAsync(int ticketId)
         {
-            var ticket = tickets.FirstOrDefault(t => t.Id == ticketId);
+            var ticket = await Task.Run(() => tickets.FirstOrDefault(t => t.Id == ticketId));
+            if(ticket != null)
+            {
+                tickets.Remove(ticket);
+            }
             return ticket;
         }
 
-        public Ticket GetTicketById(int ticketId)
+        public Task<Ticket> GetTicketByIdAsync(int ticketId)
         {
-            return tickets.SingleOrDefault(t => t.Id == ticketId);
+            return Task.Run(() => tickets.SingleOrDefault(t => t.Id == ticketId));
         }
 
         public Ticket UpdateTicket(Ticket ticket)

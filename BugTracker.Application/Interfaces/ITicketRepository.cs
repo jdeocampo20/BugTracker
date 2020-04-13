@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using BugTracker.Domain.Entities;
 
 namespace BugTracker.Application.Interfaces
@@ -14,14 +15,14 @@ namespace BugTracker.Application.Interfaces
 
         IEnumerable<TicketPriority> AllTicketPriorities { get; }
 
-        Ticket AddTicket(Ticket ticket);
+        Task<Ticket> AddTicketAsync(Ticket ticket);
 
-        Ticket DeleteTicket(int ticketId);
+        Task<Ticket> DeleteTicketAsync(int ticketId);
 
-        Ticket GetTicketById(int ticketId);
+        Task<Ticket> GetTicketByIdAsync(int ticketId);
 
         Ticket UpdateTicket(Ticket ticket);
 
-        int Commit();
+        Task<int> CommitAsync();
     }
 }

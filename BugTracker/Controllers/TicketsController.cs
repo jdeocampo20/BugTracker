@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using BugTracker.Application.Interfaces;
 using BugTracker.Domain.Entities;
 using BugTracker.Models;
@@ -47,15 +48,15 @@ namespace BugTracker.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateNewTicket(CreateTicketViewModel viewModel)
+        public async Task<IActionResult> CreateNewTicket(CreateTicketViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            ticketRepository.AddTicket(viewModel.Ticket);
-            ticketRepository.Commit();
+            await ticketRepository.AddTicketAsync(viewModel.Ticket);
+            await ticketRepository.CommitAsync();
             return RedirectToAction("Index");
         }
     }
