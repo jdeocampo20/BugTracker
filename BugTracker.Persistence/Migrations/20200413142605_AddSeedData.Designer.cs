@@ -4,14 +4,16 @@ using BugTracker.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BugTracker.Persistence.Migrations
 {
     [DbContext(typeof(BugTrackerContext))]
-    partial class BugTrackerContextModelSnapshot : ModelSnapshot
+    [Migration("20200413142605_AddSeedData")]
+    partial class AddSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,13 +29,14 @@ namespace BugTracker.Persistence.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(1024)")
                         .HasMaxLength(1024);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.HasKey("Id");
 
@@ -65,6 +68,7 @@ namespace BugTracker.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(1024)")
                         .HasMaxLength(1024);
 
@@ -73,8 +77,8 @@ namespace BugTracker.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
@@ -104,7 +108,7 @@ namespace BugTracker.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 4, 7, 0, 30, 25, 638, DateTimeKind.Local).AddTicks(160),
+                            CreatedDate = new DateTime(2020, 4, 7, 0, 26, 4, 708, DateTimeKind.Local).AddTicks(1900),
                             Description = "User menu item is missing in the nav bar",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Missing user nav menu",
@@ -116,7 +120,7 @@ namespace BugTracker.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2020, 4, 13, 0, 30, 25, 652, DateTimeKind.Local).AddTicks(3040),
+                            CreatedDate = new DateTime(2020, 4, 13, 0, 26, 4, 722, DateTimeKind.Local).AddTicks(530),
                             Description = "Link to dashboard page missing in nav",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Missing dashboard nav menu",
@@ -128,7 +132,7 @@ namespace BugTracker.Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2020, 4, 7, 0, 30, 25, 652, DateTimeKind.Local).AddTicks(3130),
+                            CreatedDate = new DateTime(2020, 4, 7, 0, 26, 4, 722, DateTimeKind.Local).AddTicks(610),
                             Description = "Create new page where the user can edit the ticket details",
                             ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Details page",

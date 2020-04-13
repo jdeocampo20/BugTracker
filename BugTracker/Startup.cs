@@ -33,9 +33,9 @@ namespace BugTracker
                 options.UseSqlServer(Configuration.GetConnectionString("BugTrackerDb"));
             });
 
-            services.AddSingleton<IMachineDateTime, MachineDateTime>();
-            services.AddSingleton<ITicketRepository, InMemoryTicketRepository>();
-            services.AddSingleton<IProjectRepository, InMemoryProjectRepository>();
+            services.AddScoped<IMachineDateTime, MachineDateTime>();
+            services.AddScoped<ITicketRepository, TicketRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
 
         }
 

@@ -7,10 +7,10 @@ namespace BugTracker.Domain.Entities
     {
         public int Id { get; set; }
 
-        [Required, StringLength(128)]
+        [Required, StringLength(256)]
         public string Name { get; set; }
 
-        [Required, StringLength(1024)]
+        [StringLength(1024)]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "The Project field is required")]
