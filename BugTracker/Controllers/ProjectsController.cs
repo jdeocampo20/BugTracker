@@ -32,15 +32,15 @@ namespace BugTracker.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateNewProject(Project project)
+        public async Task<IActionResult> CreateNewProject(Project project)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            projectRepository.AddProject(project);
-            projectRepository.Commit();
+            await projectRepository.AddProjectAsync(project);
+            await projectRepository.CommitAsync();
             return RedirectToAction("Index");
         }
     }

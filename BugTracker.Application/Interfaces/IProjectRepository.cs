@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using BugTracker.Domain.Entities;
 
 namespace BugTracker.Application.Interfaces
@@ -8,14 +9,14 @@ namespace BugTracker.Application.Interfaces
     {
         IEnumerable<Project> AllProjects { get; }
 
-        Project AddProject(Project project);
+        Task<Project> AddProjectAsync(Project project);
 
-        Project DeleteProject(int projectId);
+        Task<Project> DeleteProjectAsync(int projectId);
 
-        Project GetProjectById(int projectId);
+        Task<Project> GetProjectByIdAsync(int projectId);
 
         Project UpdateProject(Project project);
 
-        int Commit();
+        Task<int> CommitAsync();
     }
 }

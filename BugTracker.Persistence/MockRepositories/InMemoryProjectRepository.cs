@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BugTracker.Application.Interfaces;
 using BugTracker.Domain.Entities;
 
@@ -31,32 +32,36 @@ namespace BugTracker.Persistence
 
         public IEnumerable<Project> AllProjects => projects;
 
-        public Project AddProject(Project project)
+        public async Task<Project> AddProjectAsync(Project project)
         {
-            project.Id = projects.Max(p => p.Id) + 1;
-            projects.Add(project);
+            await Task.Run(() =>
+            {
+                project.Id = projects.Max(p => p.Id) + 1;
+                projects.Add(project);
+            });
             return project;
         }
 
-        public int Commit()
+        public Task<int> CommitAsync()
         {
-            return 0;
+            return Task.Run(() => 0);
         }
 
-        public Project DeleteProject(int projectId)
+        public async Task<Project> DeleteProjectAsync(int projectId)
         {
-            var project = projects.SingleOrDefault(p => p.Id == projectId);
-            if(project != null)
+            var project = await Task.Run(() => projects.SingleOrDefault(p => p.Id == projectId));
+
+            if (project != null)
             {
-                projects.Remove(project);
+                await Task.Run(() => projects.Remove(project));
             }
 
             return project;
         }
 
-        public Project GetProjectById(int projectId)
+        public Task<Project> GetProjectByIdAsync(int projectId)
         {
-            return projects.SingleOrDefault(p => p.Id == projectId);
+            return Task.Run(() => projects.SingleOrDefault(p => p.Id == projectId));
         }
 
         public Project UpdateProject(Project project)
