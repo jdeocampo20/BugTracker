@@ -7,10 +7,10 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\BugTracker.Infrastructure\BugTracker.Infrastructure\BugTracker.Infrastructure.csproj">
+    <ProjectReference Include="..\BugTracker.Persistence\BugTracker.Persistence.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\BugTracker.Persistence\BugTracker.Persistence.csproj">
+    <ProjectReference Include="..\BugTracker.Infrastructure\BugTracker.Infrastructure.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
@@ -19,5 +19,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Tickets\" />
   </ItemGroup>
 </Project>

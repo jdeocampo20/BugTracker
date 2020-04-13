@@ -5,6 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BugTracker.Application\BugTracker.Application.csproj" />
+    <ProjectReference Include="..\BugTracker.Application\BugTracker.Application.csproj" />
   </ItemGroup>
 </Project>

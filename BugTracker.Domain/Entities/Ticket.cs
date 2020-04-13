@@ -14,6 +14,7 @@ namespace BugTracker.Domain.Entities
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
 
+        public Project Project { get; set; }
         public TicketType Type { get; set; }
         public TicketStatus Status { get; set; }
         public TicketPriority Priority { get; set; }

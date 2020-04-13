@@ -6,11 +6,13 @@ namespace BugTracker.Application.Interfaces
 {
     public interface ITicketRepository
     {
+        IEnumerable<Ticket> AllTickets { get; }
+
         IEnumerable<TicketType> AllTicketTypes { get; }
 
-        IEnumerable<TicketType> AllTicketStatuses { get; }
+        IEnumerable<TicketStatus> AllTicketStatuses { get; }
 
-        IEnumerable<TicketType> AllTicketPriorities { get; }
+        IEnumerable<TicketPriority> AllTicketPriorities { get; }
 
         Ticket AddTicket(Ticket ticket);
 

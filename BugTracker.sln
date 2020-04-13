@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTracker.Persistence", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTracker.Application", "BugTracker.Application\BugTracker.Application.csproj", "{C737E1F2-A148-45A0-824B-9B7E89C7F328}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTracker.Infrastructure", "BugTracker.Infrastructure\BugTracker.Infrastructure\BugTracker.Infrastructure.csproj", "{5AFA2B9F-7A10-47ED-A6CF-9ED4ACCB4059}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTracker.Infrastructure", "BugTracker.Infrastructure\BugTracker.Infrastructure.csproj", "{8F50BBAE-0CE9-4725-B1B4-C62DAC913A1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,15 +37,15 @@ Global
 		{C737E1F2-A148-45A0-824B-9B7E89C7F328}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C737E1F2-A148-45A0-824B-9B7E89C7F328}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C737E1F2-A148-45A0-824B-9B7E89C7F328}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5AFA2B9F-7A10-47ED-A6CF-9ED4ACCB4059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5AFA2B9F-7A10-47ED-A6CF-9ED4ACCB4059}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5AFA2B9F-7A10-47ED-A6CF-9ED4ACCB4059}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5AFA2B9F-7A10-47ED-A6CF-9ED4ACCB4059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F50BBAE-0CE9-4725-B1B4-C62DAC913A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F50BBAE-0CE9-4725-B1B4-C62DAC913A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F50BBAE-0CE9-4725-B1B4-C62DAC913A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F50BBAE-0CE9-4725-B1B4-C62DAC913A1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1D074413-E599-498D-BE2F-8F31B15C4CAE} = {EF632EA8-EB80-4C38-B55C-7E6E44ADD33D}
 		{95EECA5E-331C-48BD-B02A-23769C05FB3B} = {F94B4792-4B71-4A60-944B-2AD79525ADE0}
 		{C737E1F2-A148-45A0-824B-9B7E89C7F328} = {EF632EA8-EB80-4C38-B55C-7E6E44ADD33D}
-		{5AFA2B9F-7A10-47ED-A6CF-9ED4ACCB4059} = {F94B4792-4B71-4A60-944B-2AD79525ADE0}
+		{8F50BBAE-0CE9-4725-B1B4-C62DAC913A1B} = {F94B4792-4B71-4A60-944B-2AD79525ADE0}
 	EndGlobalSection
 EndGlobal

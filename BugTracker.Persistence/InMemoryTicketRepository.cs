@@ -16,24 +16,24 @@ namespace BugTracker.Persistence
 
         public InMemoryTicketRepository()
         {
-            ticketTypes = Enum.GetNames(typeof(TicketType))
+            ticketTypes = Enum.GetNames(typeof(Enums.TicketType))
                 .Select(x => new TicketType
                 {
-                    Id = (int)Enum.Parse(typeof(TicketType), x),
+                    Id = (int)Enum.Parse(typeof(Enums.TicketType), x),
                     Name = x
                 })
                 .ToList();
-            ticketStatuses = Enum.GetNames(typeof(TicketStatus))
+            ticketStatuses = Enum.GetNames(typeof(Enums.TicketStatus))
                 .Select(x => new TicketStatus
                 {
-                    Id = (int)Enum.Parse(typeof(TicketStatus), x),
+                    Id = (int)Enum.Parse(typeof(Enums.TicketStatus), x),
                     Name = x
                 })
                 .ToList();
-            ticketPriorities = Enum.GetNames(typeof(TicketPriority))
+            ticketPriorities = Enum.GetNames(typeof(Enums.TicketPriority))
                 .Select(x => new TicketPriority
                 {
-                    Id = (int)Enum.Parse(typeof(TicketPriority), x),
+                    Id = (int)Enum.Parse(typeof(Enums.TicketPriority), x),
                     Name = x
                 })
                 .ToList();
@@ -47,8 +47,17 @@ namespace BugTracker.Persistence
                     Description = "Link to dashboard page missing in nav",
                     CreatedDate = DateTime.Now,
                     TicketTypeId = (int)Enums.TicketType.Bug,
+                    Type = ticketTypes.FirstOrDefault(t => t.Id == (int)Enums.TicketType.Bug),
                     TicketStatusId = (int)Enums.TicketStatus.ToDo,
-                    TicketPriorityId = (int)Enums.TicketPriority.Medium
+                    Status = ticketStatuses.FirstOrDefault(t => t.Id == (int)Enums.TicketStatus.ToDo),
+                    TicketPriorityId = (int)Enums.TicketPriority.Medium,
+                    Priority = ticketPriorities.FirstOrDefault(t => t.Id == (int)Enums.TicketPriority.Medium),
+                    ProjectId = 1,
+                    Project = new Project
+                    {
+                        Id = 1,
+                        Name = "Project 1"
+                    }
                 },
                 new Ticket
                 {
@@ -57,18 +66,29 @@ namespace BugTracker.Persistence
                     Description = "Create new page for blog posts",
                     CreatedDate = DateTime.Now,
                     TicketTypeId = (int)Enums.TicketType.Bug,
+                    Type = ticketTypes.FirstOrDefault(t => t.Id == (int)Enums.TicketType.Bug),
                     TicketStatusId = (int)Enums.TicketStatus.ToDo,
-                    TicketPriorityId = (int)Enums.TicketPriority.Medium
+                    Status = ticketStatuses.FirstOrDefault(t => t.Id == (int)Enums.TicketStatus.ToDo),
+                    TicketPriorityId = (int)Enums.TicketPriority.Medium,
+                    Priority = ticketPriorities.FirstOrDefault(t => t.Id == (int)Enums.TicketPriority.Medium),
+                    ProjectId = 2,
+                    Project = new Project
+                    {
+                        Id = 2,
+                        Name = "Project 2"
+                    }
                 }
             };
 
         }
 
-        public IEnumerable<TicketType> AllTicketTypes => throw new NotImplementedException();
+        public IEnumerable<TicketType> AllTicketTypes => ticketTypes;
 
-        public IEnumerable<TicketType> AllTicketStatuses => throw new NotImplementedException();
+        public IEnumerable<TicketStatus> AllTicketStatuses => ticketStatuses;
 
-        public IEnumerable<TicketType> AllTicketPriorities => throw new NotImplementedException();
+        public IEnumerable<TicketPriority> AllTicketPriorities => ticketPriorities;
+
+        public IEnumerable<Ticket> AllTickets => tickets;
 
         public Ticket AddTicket(Ticket ticket)
         {
