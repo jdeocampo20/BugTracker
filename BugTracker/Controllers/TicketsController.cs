@@ -52,6 +52,31 @@ namespace BugTracker.Controllers
             return View(ticket);
         }
 
+        public async Task<IActionResult> Edit(int ticketId)
+        {
+            var ticket = await ticketRepository.GetTicketByIdAsync(ticketId);
+            var projects = projectRepository.AllProjects.Select(p => new SelectListItem
+            {
+                Value = p.Id.ToString(),
+                Text = p.Name
+            });
+            var statuses = ticketRepository.AllTicketStatuses.Select(p => new SelectListItem
+            {
+                Value = p.Id.ToString(),
+                Text = p.Name
+            });
+            
+
+            var ctvm = new EditTicketViewModel
+            {
+                Ticket = ticket,
+                Projects = projects,
+                Statuses = statuses
+            };
+
+            return View(ctvm);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> CreateNewTicket(CreateTicketViewModel viewModel)
@@ -64,6 +89,19 @@ namespace BugTracker.Controllers
             await ticketRepository.AddTicketAsync(viewModel.Ticket);
             await ticketRepository.CommitAsync();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditTicket(CreateTicketViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            ticketRepository.UpdateTicket(viewModel.Ticket);
+            await ticketRepository.CommitAsync();
+            return RedirectToAction("Details", new { ticketId = viewModel.Ticket.Id });
         }
     }
 }

@@ -5,7 +5,13 @@
 
 <h1 class="page-title">@Model.Name</h1>
 <div class="card mb-3">
-    <div class="card-header">Details</div>
+    <div class="card-header d-flex">
+        <span>Details</span>
+        <a class="btn btn-primary edit-btn"
+           asp-controller="Tickets"
+           asp-action="Edit"
+           asp-route-ticketId="@Model.Id">Edit</a>
+    </div>
     <div class="card-body">
         <div class="container">
             <div class="row">

@@ -77,3 +77,7 @@ body {
 .crt-new-btn {
     margin-bottom: 0.5em;
 }
+
+.edit-btn {
+    margin-left: auto;
+}

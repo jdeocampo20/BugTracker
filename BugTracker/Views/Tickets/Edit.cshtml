@@ -1,0 +1,71 @@
+﻿@model EditTicketViewModel
+@using Enums = BugTracker.Domain.Enums
+@{
+    ViewData["Title"] = "Edit Ticket";
+}
+
+<h1 class="page-title">@ViewData["Title"]</h1>
+
+<form method="post" asp-action="EditTicket" class="form">
+    <input type="hidden" asp-for="Ticket.Id" />
+    <input type="hidden" asp-for="Ticket.CreatedDate" />
+    <div class="form-group row">
+        <label asp-for="Ticket.Name" class="col-sm-2"></label>
+        <div class="col-md-5">
+            <input asp-for="Ticket.Name" class="form-control" />
+            <span asp-validation-for="Ticket.Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Ticket.Description" class="col-sm-2"></label>
+        <div class="col-md-5">
+            <textarea asp-for="Ticket.Description" class="form-control"></textarea>
+            <span asp-validation-for="Ticket.Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Ticket.ProjectId" class="col-sm-2">Project</label>
+        <div class="col-md-5">
+            <select class="form-control" asp-for="Ticket.ProjectId" asp-items="Model.Projects">
+                <option value="">Project</option>
+            </select>
+            <span asp-validation-for="Ticket.ProjectId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Ticket.TicketTypeId" class="col-sm-2">Type</label>
+        <div class="col-md-5">
+            <select class="form-control"
+                    asp-for="Ticket.TicketTypeId"
+                    asp-items="Html.GetEnumSelectList<Enums.TicketType>()">
+                <option value="">Type</option>
+            </select>
+            <span asp-validation-for="Ticket.TicketTypeId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Ticket.TicketPriorityId" class="col-sm-2">Priority</label>
+        <div class="col-md-5">
+            <select class="form-control"
+                    asp-for="Ticket.TicketPriorityId"
+                    asp-items="Html.GetEnumSelectList<Enums.TicketPriority>()">
+                <option value="">Priority</option>
+            </select>
+            <span asp-validation-for="Ticket.TicketPriorityId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Ticket.TicketStatusId" class="col-sm-2">Status</label>
+        <div class="col-md-5">
+            <select class="form-control" asp-for="Ticket.TicketStatusId" asp-items="Model.Statuses">
+                <option value="">Status</option>
+            </select>
+            <span asp-validation-for="Ticket.TicketStatusId" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts  {
+    <partial name="_ValidationScriptsPartial" />
+}
