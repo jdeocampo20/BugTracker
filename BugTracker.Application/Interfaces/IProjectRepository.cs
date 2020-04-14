@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BugTracker.Domain.Entities;
 
@@ -7,7 +8,7 @@ namespace BugTracker.Application.Interfaces
 {
     public interface IProjectRepository
     {
-        IEnumerable<Project> AllProjects { get; }
+        IQueryable<Project> AllProjects { get; }
 
         Task<Project> AddProjectAsync(Project project);
 

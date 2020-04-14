@@ -5,6 +5,7 @@ using BugTracker.Domain.Entities;
 using BugTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,19 +24,21 @@ namespace BugTracker.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var tickets = ticketRepository.AllTickets;
+            var tickets = await ticketRepository.AllTickets.ToListAsync();
             return View(tickets);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var projects = projectRepository.AllProjects.Select(p => new SelectListItem
-            {
-                Value = p.Id.ToString(),
-                Text = p.Name
-            });
+            var projects = await projectRepository.AllProjects
+                .Select(p => new SelectListItem
+                {
+                    Value = p.Id.ToString(),
+                    Text = p.Name
+                })
+                .ToListAsync();
 
             var ctvm = new CreateTicketViewModel
             {
@@ -55,17 +58,22 @@ namespace BugTracker.Controllers
         public async Task<IActionResult> Edit(int ticketId)
         {
             var ticket = await ticketRepository.GetTicketByIdAsync(ticketId);
-            var projects = projectRepository.AllProjects.Select(p => new SelectListItem
-            {
-                Value = p.Id.ToString(),
-                Text = p.Name
-            });
-            var statuses = ticketRepository.AllTicketStatuses.Select(p => new SelectListItem
-            {
-                Value = p.Id.ToString(),
-                Text = p.Name
-            });
-            
+
+            var projects = await projectRepository.AllProjects
+                .Select(p => new SelectListItem
+                {
+                    Value = p.Id.ToString(),
+                    Text = p.Name
+                })
+                .ToListAsync();
+
+            var statuses = await ticketRepository.AllTicketStatuses
+                .Select(p => new SelectListItem
+                {
+                    Value = p.Id.ToString(),
+                    Text = p.Name
+                })
+                .ToListAsync();
 
             var ctvm = new EditTicketViewModel
             {

@@ -30,7 +30,7 @@ namespace BugTracker.Persistence
             };
         }
 
-        public IEnumerable<Project> AllProjects => projects;
+        public IQueryable<Project> AllProjects => projects.AsQueryable();
 
         public async Task<Project> AddProjectAsync(Project project)
         {

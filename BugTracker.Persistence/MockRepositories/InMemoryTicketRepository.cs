@@ -86,13 +86,13 @@ namespace BugTracker.Persistence
             this.projectRepository = projectRepository;
         }
 
-        public IEnumerable<TicketType> AllTicketTypes => ticketTypes;
+        public IQueryable<TicketType> AllTicketTypes => ticketTypes.AsQueryable();
 
-        public IEnumerable<TicketStatus> AllTicketStatuses => ticketStatuses;
+        public IQueryable<TicketStatus> AllTicketStatuses => ticketStatuses.AsQueryable();
 
-        public IEnumerable<TicketPriority> AllTicketPriorities => ticketPriorities;
+        public IQueryable<TicketPriority> AllTicketPriorities => ticketPriorities.AsQueryable();
 
-        public IEnumerable<Ticket> AllTickets => tickets;
+        public IQueryable<Ticket> AllTickets => tickets.AsQueryable();
 
         public async Task<Ticket> AddTicketAsync(Ticket ticket)
         {

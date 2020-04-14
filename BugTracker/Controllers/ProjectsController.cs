@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BugTracker.Application.Interfaces;
 using BugTracker.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,9 +21,9 @@ namespace BugTracker.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var projects = projectRepository.AllProjects;
+            var projects = await projectRepository.AllProjects.ToListAsync();
             return View(projects);
         }
 

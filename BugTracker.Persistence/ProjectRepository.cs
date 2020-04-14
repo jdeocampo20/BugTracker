@@ -17,7 +17,7 @@ namespace BugTracker.Persistence
             this.context = context;
         }
 
-        public IEnumerable<Project> AllProjects => context.Projects;
+        public IQueryable<Project> AllProjects => context.Projects;
 
         public async Task<Project> AddProjectAsync(Project project)
         {

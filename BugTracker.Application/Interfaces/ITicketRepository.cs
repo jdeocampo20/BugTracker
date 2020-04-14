@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BugTracker.Domain.Entities;
 
@@ -7,13 +8,13 @@ namespace BugTracker.Application.Interfaces
 {
     public interface ITicketRepository
     {
-        IEnumerable<Ticket> AllTickets { get; }
+        IQueryable<Ticket> AllTickets { get; }
 
-        IEnumerable<TicketType> AllTicketTypes { get; }
+        IQueryable<TicketType> AllTicketTypes { get; }
 
-        IEnumerable<TicketStatus> AllTicketStatuses { get; }
+        IQueryable<TicketStatus> AllTicketStatuses { get; }
 
-        IEnumerable<TicketPriority> AllTicketPriorities { get; }
+        IQueryable<TicketPriority> AllTicketPriorities { get; }
 
         Task<Ticket> AddTicketAsync(Ticket ticket);
 
